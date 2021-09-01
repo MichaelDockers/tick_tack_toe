@@ -17,7 +17,7 @@ def check_win(player):
 def check_input(in_type, ch):
     item = in_type.split()
     parse_move = False
-    while parse_move == False:
+    while not parse_move:
         if len(item) != 2:
             print('Wrong input 1. Must be two digits (from 0 to 2) separated by space')
             item = input(f'{ch}. Your move: ').split()
