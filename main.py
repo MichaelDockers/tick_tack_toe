@@ -88,7 +88,7 @@ def move_gen():
 
 
 g_m = []
-quest = input('Do you want to play the game? (y/n) ')
+quest = input('Do you want to play the game? (y/n) ').lower()
 
 while quest not in 'yn':
     quest = input('Do you want to play the game? (y/n) ')
