@@ -90,6 +90,9 @@ def move_gen():
 g_m = []
 quest = input('Do you want to play the game? (y/n) ')
 
+while quest not in 'yn':
+    quest = input('Do you want to play the game? (y/n) ')
+
 while quest == 'y':
     g_m = [['-' for _ in range(3)] for _ in range(3)]
     player1, player2 = (random.sample([input('Enter players 1 name: '),
@@ -98,26 +101,26 @@ while quest == 'y':
     print(f'{player1} plays X, {player2} plays 0')
     move_type = move_gen()
     start_move = next(move_type)
+
     # Checking ending the game (win or draw)
     while not check_win(players[start_move]):
-
 
         # Printing empty game
         print_game()
 
         # Checking move input validity
-        move = check_input(input(f'{players[start_move]}. Your move: '), players[start_move])
+        move = check_input(input(f'{players[start_move]}. Your move ({start_move}): '), players[start_move])
 
         # Checking empty cell or not
         while not check_move(move):
-            move = check_input(input(f'{players[start_move]}. Your move: '), players[start_move])
+            move = check_input(input(f'{players[start_move]}. Your move ({start_move}): '), players[start_move])
 
         # Checking 2 rules
         while not check_rules(move, start_move):
-            move = check_input(input(f'{players[start_move]}. Your move: '), players[start_move])
+            move = check_input(input(f'{players[start_move]}. Your move ({start_move}): '), players[start_move])
 
         # If everythig is OK, making move
         make_move(move, start_move)
         start_move = next(move_type)
 
-    quest = input('Do you want to play one more gate? (y/n) ')
+    quest = input('Do you want to play one more game? (y/n) ')
