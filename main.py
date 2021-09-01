@@ -16,16 +16,17 @@ def check_win(player):
 
 def check_input(in_type, ch):
     item = in_type.split()
+    error_message = 'Wrong input. Must be two digits (from 0 to 2) separated by space'
     parse_move = False
     while not parse_move:
         if len(item) != 2:
-            print('Wrong input 1. Must be two digits (from 0 to 2) separated by space')
+            print(error_message)
             item = input(f'{ch}. Your move: ').split()
         elif not (item[0].isdigit() and item[1].isdigit()):
-            print('Wrong input 2. Must be two digits (from 0 to 2) separated by space')
+            print(error_message)
             item = input(f'{ch}. Your move: ').split()
         elif not (0 <= int(item[0]) <= 2 and 0 <= int(item[1]) <= 2):
-            print('Wrong input 3. Must be two digits (from 0 to 2) separated by space')
+            print(error_message)
             item = input(f'{ch}. Your move: ').split()
         else:
             parse_move = True
