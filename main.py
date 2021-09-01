@@ -44,10 +44,6 @@ def check_rules(move_to_check, ch):
 
     for item, key in dict_of_vars.items():
         if all([item.count(ch) == 2, item.count('-') == 1]):
-<<<<<<< HEAD
-=======
-            print(item)
->>>>>>> a5279424785b383b491528874bd1f82dbf3e05df
             if move_to_check not in key:
                 print('You bracking the first Rule. Please, prevent the end of game')
                 return False
