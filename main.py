@@ -42,12 +42,16 @@ def check_rules(move_to_check, ch):
                     (g_m[0][2], g_m[1][2], g_m[2][2]): [(0, 2), (1, 2), (2, 2)],
                     (g_m[0][0], g_m[1][1], g_m[2][2]): [(0, 0), (1, 1), (2, 2)],
                     (g_m[0][2], g_m[1][1], g_m[2][0]): [(0, 2), (1, 1), (2, 0)]}
+
     list_for_second_rule = []
+
     for item, key in dict_of_vars.items():
         if all([item.count(ch) == 2, item.count('-') == 1]):
             if move_to_check not in key:
                 print('You are bracking the first Rule. Please, end the game')
                 return False
+            else:
+                return True
 
 
     txt = '0' if ch == 'X' else 'X'
