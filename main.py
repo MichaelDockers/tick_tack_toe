@@ -41,24 +41,23 @@ def check_rules(move_to_check, ch):
                     (g_m[0][2], g_m[1][2], g_m[2][2]): [(0, 2), (1, 2), (2, 2)],
                     (g_m[0][0], g_m[1][1], g_m[2][2]): [(0, 0), (1, 1), (2, 2)],
                     (g_m[0][2], g_m[1][1], g_m[2][0]): [(0, 2), (1, 1), (2, 0)]}
-    dict_for_second_rule = dict()
+    list_for_second_rule = []
     for item, key in dict_of_vars.items():
         if all([item.count(ch) == 2, item.count('-') == 1]):
             if move_to_check not in key:
                 print('You are bracking the first Rule. Please, end the game')
                 return False
 
+
     txt = '0' if ch == 'X' else 'X'
     for item, key in dict_of_vars.items():
         if all([item.count(txt) == 2, item.count('-') == 1]):
-            dict_for_second_rule[item] = key
-            # if move_to_check not in key:
-            #     print('You bracking the second Rule. Please, prevent end of this game')
-    if len(dict_for_second_rule) > 0:
-        while move_to_check not in key:
-            print('You are bracking the second Rule. Please, prevent end of this game')
-            move_to_check = check_input(input(f'{ch}. Your move: '), ch)
+            list_for_second_rule.extend(key)
 
+    if len(list_for_second_rule) > 0:
+        if move_to_check not in list_for_second_rule:
+            print('You are bracking the second Rule. Please, prevent end of this game')
+            return False
     return True
 
 
@@ -120,8 +119,5 @@ while quest == 'y':
         # If everythig is OK, making move
         make_move(move, start_move)
         start_move = next(move_type)
-
-
-
 
     quest = input('Do you want to play one more gate? (y/n) ')
