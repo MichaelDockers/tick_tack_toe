@@ -2,6 +2,8 @@ import random
 
 
 def check_win(player):
+    # Function for checking wining
+
     if (g_m[0][0] == g_m[0][1] == g_m[0][2] == ('X' or '0') or g_m[1][0] == g_m[1][1] == g_m[1][2] == ('X' or '0') or
         g_m[2][0] == g_m[2][1] == g_m[2][2] == ('X' or '0') or g_m[0][0] == g_m[1][0] == g_m[2][0] == ('X' or '0') or
         g_m[0][1] == g_m[1][1] == g_m[2][1] == ('X' or '0') or g_m[0][2] == g_m[1][2] == g_m[2][2] == ('X' or '0') or
@@ -15,6 +17,8 @@ def check_win(player):
 
 
 def check_input(in_type, ch):
+    # Function for checking correction of movement input
+
     item = in_type.split()
     error_message = 'Wrong input. Must be two digits (from 0 to 2) separated by space'
     parse_move = False
@@ -34,6 +38,8 @@ def check_input(in_type, ch):
 
 
 def check_rules(move_to_check, ch):
+    # Function for checking two rules
+
     dict_of_vars = {(g_m[0][0], g_m[0][1], g_m[0][2]): [(0, 0), (0, 1), (0, 2)],
                     (g_m[1][0], g_m[1][1], g_m[1][2]): [(1, 0), (1, 1), (1, 2)],
                     (g_m[2][0], g_m[2][1], g_m[2][2]): [(2, 0), (2, 1), (2, 2)],
@@ -43,16 +49,26 @@ def check_rules(move_to_check, ch):
                     (g_m[0][0], g_m[1][1], g_m[2][2]): [(0, 0), (1, 1), (2, 2)],
                     (g_m[0][2], g_m[1][1], g_m[2][0]): [(0, 2), (1, 1), (2, 0)]}
 
+    list_for_first_rule = []
     list_for_second_rule = []
+
+    # Checking First Rule (if you can win - you have to win)
 
     for item, key in dict_of_vars.items():
         if all([item.count(ch) == 2, item.count('-') == 1]):
-            if move_to_check not in key:
-                print('You are bracking the first Rule. Please, end the game')
-                return False
-            else:
-                return True
+            list_for_first_rule.extend(key)
+            print(list_for_first_rule)
 
+    if len(list_for_first_rule) > 0:
+
+        if move_to_check not in list_for_first_rule:
+            print('You are bracking the first Rule. Please, end the game')
+            return False
+        else:
+            return True
+
+    # Checking Second Rule (if you cannot win this turn,
+    # but can lose next - you have prevent lose. If two losing position - check one)
 
     txt = '0' if ch == 'X' else 'X'
     for item, key in dict_of_vars.items():
@@ -63,10 +79,15 @@ def check_rules(move_to_check, ch):
         if move_to_check not in list_for_second_rule:
             print('You are bracking the second Rule. Please, prevent end of this game')
             return False
+        else:
+            return True
+
     return True
 
 
 def check_move(move_to_check):
+    # Function that check movement if cell is occupied
+
     if g_m[move[0]][move[1]] == '-':
         return True
     else:
@@ -75,16 +96,22 @@ def check_move(move_to_check):
 
 
 def make_move(move, ch):
+    # Function to make move (check the cell with X or 0)
+
     g_m[move[0]][move[1]] = ch
 
 
 def print_game():
+    # Printing the game
+
     print('  0 1 2')
     for i, item in enumerate(g_m):
         print(i, *item)
 
 
 def move_gen():
+    # Generating next character
+
     iter_list = ['X', '0']
     while True:
         item = iter_list.pop(0)
@@ -100,6 +127,7 @@ while quest not in 'yn':
 
 while quest == 'y':
     g_m = [['-' for _ in range(3)] for _ in range(3)]
+    # g_m = [['X', '0', 'X'], ['-', 'X', '-'], ['-', '0', '-']]
     player1, player2 = (random.sample([input('Enter players 1 name: '),
                                        input('Enter players 2 name: ')], 2))
     players = {'X': player1, '0': player2}
