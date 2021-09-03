@@ -128,7 +128,6 @@ while quest not in 'yn':
 
 while quest == 'y':
     g_m = [['-' for _ in range(3)] for _ in range(3)]
-    # g_m = [['X', '0', 'X'], ['-', 'X', '-'], ['-', '0', '-']]
     player1, player2 = (random.sample([input('Enter players 1 name: '),
                                        input('Enter players 2 name: ')], 2))
     players = {'X': player1, '0': player2}
