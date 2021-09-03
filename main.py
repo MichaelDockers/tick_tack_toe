@@ -62,7 +62,7 @@ def check_rules(move_to_check, ch):
     if len(list_for_first_rule) > 0:
 
         if move_to_check not in list_for_first_rule:
-            print('You are bracking the first Rule. Please, end the game')
+            print('You are bracking the first Rule. Please, end the game!')
             return False
         else:
             return True
