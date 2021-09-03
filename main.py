@@ -4,10 +4,12 @@ import random
 def check_win(player):
     # Function for checking wining
 
-    if (g_m[0][0] == g_m[0][1] == g_m[0][2] == ('X' or '0') or g_m[1][0] == g_m[1][1] == g_m[1][2] == ('X' or '0') or
+    if (
+        g_m[0][0] == g_m[0][1] == g_m[0][2] == ('X' or '0') or g_m[1][0] == g_m[1][1] == g_m[1][2] == ('X' or '0') or
         g_m[2][0] == g_m[2][1] == g_m[2][2] == ('X' or '0') or g_m[0][0] == g_m[1][0] == g_m[2][0] == ('X' or '0') or
         g_m[0][1] == g_m[1][1] == g_m[2][1] == ('X' or '0') or g_m[0][2] == g_m[1][2] == g_m[2][2] == ('X' or '0') or
-        g_m[0][0] == g_m[1][1] == g_m[2][2] == ('X' or '0') or g_m[0][2] == g_m[1][1] == g_m[2][0] == ('X' or '0')):
+        g_m[0][0] == g_m[1][1] == g_m[2][2] == ('X' or '0') or g_m[0][2] == g_m[1][1] == g_m[2][0] == ('X' or '0')
+    ):
         print(f'Player {player} wins the Game')
         return True
     elif all(['-' not in g_m[0], '-' not in g_m[1], '-' not in g_m[2]]):
@@ -57,12 +59,11 @@ def check_rules(move_to_check, ch):
     for item, key in dict_of_vars.items():
         if all([item.count(ch) == 2, item.count('-') == 1]):
             list_for_first_rule.extend(key)
-            print(list_for_first_rule)
 
     if len(list_for_first_rule) > 0:
 
         if move_to_check not in list_for_first_rule:
-            print('You are bracking the first Rule. Please, end the game!')
+            print('You are breaking the first Rule. Please, end the game')
             return False
         else:
             return True
@@ -77,7 +78,7 @@ def check_rules(move_to_check, ch):
 
     if len(list_for_second_rule) > 0:
         if move_to_check not in list_for_second_rule:
-            print('You are bracking the second Rule. Please, prevent end of this game')
+            print('You are breaking the second Rule. Please, prevent end of this game')
             return False
         else:
             return True
@@ -88,17 +89,17 @@ def check_rules(move_to_check, ch):
 def check_move(move_to_check):
     # Function that check movement if cell is occupied
 
-    if g_m[move[0]][move[1]] == '-':
+    if g_m[move_to_check[0]][move_to_check[1]] == '-':
         return True
     else:
         print('Wrong cell. Choose another')
         return False
 
 
-def make_move(move, ch):
+def make_move(move_to_do, ch):
     # Function to make move (check the cell with X or 0)
 
-    g_m[move[0]][move[1]] = ch
+    g_m[move_to_do[0]][move_to_do[1]] = ch
 
 
 def print_game():
@@ -152,7 +153,7 @@ while quest == 'y':
         while not check_rules(move, start_move):
             move = check_input(input(f'{players[start_move]}. Your move ({start_move}): '), players[start_move])
 
-        # If everythig is OK, making move
+        # If everything is OK, making move
         make_move(move, start_move)
         start_move = next(move_type)
 
